@@ -28,15 +28,6 @@ class Microphone extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.speechRecongnition.onresult = function(event) {
-            var current = event.resultIndex;
-            this.setState({
-                text: event.results[current][0].transcript
-            });
-        };
-    }
-
     /*
      *  @render()
      *  React Lifecyle Function
@@ -71,6 +62,12 @@ class Microphone extends React.Component {
 
     startRecord() {
         this.speechRecongnition.start();
+        this.speechRecongnition.onresult = function(event) {
+            var current = event.resultIndex;
+            this.setState({
+                text: event.results[current][0].transcript
+            });
+        };
     }
 
     stopRecord() {
