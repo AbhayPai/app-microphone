@@ -14,6 +14,11 @@ class Microphone extends React.Component {
         this.speechRecongnition = null;
         this.stopRecord = this.stopRecord.bind(this);
         this.startRecord = this.startRecord.bind(this);
+
+        this.state = {
+            text: 'Speak something after clicking on Start Recording, I Will update here'
+        };
+
         try {
             speechRecongnition = window.SpeechRecognition ||
                 window.webkitSpeechRecognition;
@@ -21,6 +26,15 @@ class Microphone extends React.Component {
         } catch(e) {
             // Do Nothing.
         }
+    }
+
+    componentDidMount() {
+        this.speechRecongnition.onresult = function(event) {
+            var current = event.resultIndex;
+            this.setState({
+                text: event.results[current][0].transcript
+            });
+        };
     }
 
     /*
@@ -50,6 +64,7 @@ class Microphone extends React.Component {
                     </a>
                 </p>
                 <h1>Hello, {name}!!!</h1>
+                <p>{this.state.text}</p>
             </Fragment>
         );
     }
