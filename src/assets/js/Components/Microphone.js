@@ -25,10 +25,10 @@ class Microphone extends React.Component {
             this.speechRecongnition = new speechRecongnition();
             this.speechRecongnition.onresult =
                 this.speechRecongnition.onresult.bind(this);
-            this.speechRecongnition.onaudiostart =
-                this.speechRecongnition.onaudiostart.bind(this);
-            this.speechRecongnition.onaudioend =
-                this.speechRecongnition.onaudioend.bind(this);
+            this.speechRecongnition.onspeechstart =
+                this.speechRecongnition.onspeechstart.bind(this);
+            this.speechRecongnition.onspeechend =
+                this.speechRecongnition.onspeechend.bind(this);
         } catch(e) {
             // Do Nothing.
         }
@@ -83,6 +83,16 @@ class Microphone extends React.Component {
 
             // eslint-disable-next-line
             console.log('this.speechRecongnition', this.speechRecongnition);
+
+            this.speechRecongnition.onspeechstart = (event) => {
+                // eslint-disable-next-line
+                console.log('onspeechstart', event);
+            };
+
+            this.speechRecongnition.onspeechend = (event) => {
+                // eslint-disable-next-line
+                console.log('onspeechend', event);
+            };
 
             this.speechRecongnition.onresult = (event) => {
                 // eslint-disable-next-line
