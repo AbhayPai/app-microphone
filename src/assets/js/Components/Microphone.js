@@ -23,6 +23,8 @@ class Microphone extends React.Component {
             speechRecongnition = window.SpeechRecognition ||
                 window.webkitSpeechRecognition;
             this.speechRecongnition = new speechRecongnition();
+            this.speechRecongnition.onresult =
+                this.speechRecongnition.onresult.bind(this);
         } catch(e) {
             // Do Nothing.
         }
@@ -61,17 +63,21 @@ class Microphone extends React.Component {
     }
 
     startRecord() {
-        this.speechRecongnition.start();
-        this.speechRecongnition.onresult = function(event) {
-            var current = event.resultIndex;
-            this.setState({
-                text: event.results[current][0].transcript
-            });
-        };
+        if (this.speechRecongnition) {
+            this.speechRecongnition.start();
+            this.speechRecongnition.onresult = function(event) {
+                var current = event.resultIndex;
+                this.setState({
+                    text: event.results[current][0].transcript
+                });
+            };
+        }
     }
 
     stopRecord() {
-        this.speechRecongnition.stop();
+        if (this.speechRecongnition) {
+            this.speechRecongnition.stop();
+        }
     }
 }
 
