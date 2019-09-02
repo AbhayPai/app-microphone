@@ -25,6 +25,10 @@ class Microphone extends React.Component {
             this.speechRecongnition = new speechRecongnition();
             this.speechRecongnition.onresult =
                 this.speechRecongnition.onresult.bind(this);
+            this.speechRecongnition.onaudiostart =
+                this.speechRecongnition.onaudiostart.bind(this);
+            this.speechRecongnition.onaudioend =
+                this.speechRecongnition.onaudioend.bind(this);
         } catch(e) {
             // Do Nothing.
         }
@@ -76,9 +80,44 @@ class Microphone extends React.Component {
         if (this.speechRecongnition) {
             var noteContent = '';
             this.speechRecongnition.start();
+
+            this.speechRecongnition.onaudiostart = (event) => {
+                // eslint-disable-next-line
+                console.log('onaudiostart', event);
+                var current = event.resultIndex;
+                var transcript = event.results[current][0].transcript;
+                var mobileRepeatBug = (current == 1 &&
+                    transcript == event.results[0][0].transcript);
+
+                if(!mobileRepeatBug) {
+                    noteContent += transcript;
+                }
+
+                this.setState({
+                    text: noteContent
+                });
+            };
+
+            this.speechRecongnition.onaudioend = (event) => {
+                // eslint-disable-next-line
+                console.log('onaudioend', event);
+                var current = event.resultIndex;
+                var transcript = event.results[current][0].transcript;
+                var mobileRepeatBug = (current == 1 &&
+                    transcript == event.results[0][0].transcript);
+
+                if(!mobileRepeatBug) {
+                    noteContent += transcript;
+                }
+
+                this.setState({
+                    text: noteContent
+                });
+            };
+
             this.speechRecongnition.onresult = (event) => {
                 // eslint-disable-next-line
-                console.log('event', event);
+                console.log('onresult', event);
                 var current = event.resultIndex;
                 var transcript = event.results[current][0].transcript;
                 var mobileRepeatBug = (current == 1 &&
