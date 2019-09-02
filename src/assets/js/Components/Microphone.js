@@ -35,7 +35,7 @@ class Microphone extends React.Component {
      */
     componentDidMount() {
         if (this.speechRecongnition) {
-            this.speechRecongnition = true;
+            this.speechRecongnition.continuous = true;
         }
     }
 
