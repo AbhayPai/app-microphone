@@ -12,7 +12,6 @@ class Microphone extends React.Component {
         super(props);
         var speechRecongnition = null;
         this.speechRecongnition = null;
-        this.stopRecord = this.stopRecord.bind(this);
         this.startRecord = this.startRecord.bind(this);
 
         this.state = {
@@ -51,11 +50,6 @@ class Microphone extends React.Component {
                         Start Recording
                     </a>
                 </p>
-                <p>
-                    <a onClick={this.stopRecord}>
-                        Stop Recording
-                    </a>
-                </p>
                 <h1>Hello, {name}!!!</h1>
                 <p>{this.state.text}</p>
             </Fragment>
@@ -71,12 +65,6 @@ class Microphone extends React.Component {
                     text: event.results[current][0].transcript
                 });
             };
-        }
-    }
-
-    stopRecord() {
-        if (this.speechRecongnition) {
-            this.speechRecongnition.stop();
         }
     }
 }
