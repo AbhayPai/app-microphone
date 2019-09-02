@@ -30,6 +30,16 @@ class Microphone extends React.Component {
     }
 
     /*
+     *  @componentDidMount()
+     *  React Lifecyle Function
+     */
+    componentDidMount() {
+        if (this.speechRecongnition) {
+            this.speechRecongnition = true;
+        }
+    }
+
+    /*
      *  @render()
      *  React Lifecyle Function
      */
