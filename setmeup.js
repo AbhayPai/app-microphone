@@ -1,6 +1,7 @@
 module.exports = function(config) {
     this.entry = {
         index: config.Path.join(config.Webpack_DIR, 'src/assets/js/Pages/index.js'),
+        vendor: config.Path.join(config.Webpack_DIR, 'src/assets/js/Pages/vendor.js'),
     };
 
     this.alias = {
@@ -41,9 +42,11 @@ module.exports = function(config) {
                 ),
                 assets: {
                     css: [
-                        './css/index.' + config.CustomTimeHash + '.css'
+                        './css/index.' + config.CustomTimeHash + '.css',
+                        './css/vendor.' + config.CustomTimeHash + '.css'
                     ],
                     js: [
+                        './js/index.' + config.CustomTimeHash + '.js',
                         './js/index.' + config.CustomTimeHash + '.js'
                     ]
                 }

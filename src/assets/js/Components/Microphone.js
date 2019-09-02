@@ -60,18 +60,28 @@ class Microphone extends React.Component {
          */
         return (
             <Fragment>
-                <p>
-                    <a onClick={this.startRecord}>
-                        Start Recording
-                    </a>
-                </p>
-                <p>
-                    <a onClick={this.stopRecord}>
-                        Stop Recording
-                    </a>
-                </p>
-                <h1>Hello, {name}!!!</h1>
-                <p>{this.state.text}</p>
+                <div className='row'>
+                    <div className='col-12'>
+                        <h1>Hello, {name}!!!</h1>
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-3 col-sm-1 col-lg-2'>
+                        <a className='btn btn-primary text-white' onClick={this.startRecord}>
+                            Start Recording
+                        </a>
+                    </div>
+                    <div className='col-3 col-sm-1 col-lg-2'>
+                        <a className='btn btn-primary text-white' onClick={this.stopRecord}>
+                            Stop Recording
+                        </a>
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-12'>
+                        <p>{this.state.text}</p>
+                    </div>
+                </div>
             </Fragment>
         );
     }
@@ -80,19 +90,6 @@ class Microphone extends React.Component {
         if (this.speechRecongnition) {
             var noteContent = '';
             this.speechRecongnition.start();
-
-            // eslint-disable-next-line
-            console.log('this.speechRecongnition', this.speechRecongnition);
-
-            this.speechRecongnition.onspeechstart = (event) => {
-                // eslint-disable-next-line
-                console.log('onspeechstart', event);
-            };
-
-            this.speechRecongnition.onspeechend = (event) => {
-                // eslint-disable-next-line
-                console.log('onspeechend', event);
-            };
 
             this.speechRecongnition.onresult = (event) => {
                 // eslint-disable-next-line
