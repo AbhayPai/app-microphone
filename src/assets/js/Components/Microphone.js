@@ -67,9 +67,9 @@ class Microphone extends React.Component {
             this.speechRecongnition.start();
             // eslint-disable-next-line
             console.log('this.speechRecongnition', this.speechRecongnition);
-            this.speechRecongnition.onresult = function(event) {
+            this.speechRecongnition.onresult = (event) => {
                 // eslint-disable-next-line
-                console.log('event', event);
+                console.log('this.setState', this.setState);
                 var current = event.resultIndex;
                 this.setState({
                     text: event.results[current][0].transcript
