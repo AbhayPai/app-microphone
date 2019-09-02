@@ -74,11 +74,20 @@ class Microphone extends React.Component {
 
     startRecord() {
         if (this.speechRecongnition) {
+            var noteContent = '';
             this.speechRecongnition.start();
             this.speechRecongnition.onresult = (event) => {
                 var current = event.resultIndex;
+                var transcript = event.results[current][0].transcript;
+                var mobileRepeatBug = (current == 1 &&
+                    transcript == event.results[0][0].transcript);
+
+                if(!mobileRepeatBug) {
+                    noteContent += transcript;
+                }
+
                 this.setState({
-                    text: event.results[current][0].transcript
+                    text: noteContent
                 });
             };
         }

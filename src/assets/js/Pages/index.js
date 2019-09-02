@@ -20,7 +20,7 @@ class Index {
      *  all definition of variable should be done inside this
      */
     constructor () {
-        this.name = 'Abhay';
+        this.name = 'User';
     }
 
     /*
