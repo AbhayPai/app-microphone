@@ -46,7 +46,8 @@ class Index {
             if (detectBrowser.isDesktopChrome &&
                 !detectBrowser.isIOSChrome &&
                 !detectBrowser.isIE &&
-                !detectBrowser.isMobile) {
+                !detectBrowser.isMobile &&
+                !detectBrowser.isOpera) {
                 ReactDOM.render(
                     <Microphone name={this.name} />,
                     document.getElementById('app')
