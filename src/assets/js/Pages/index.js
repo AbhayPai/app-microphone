@@ -44,7 +44,9 @@ class Index {
         if (document.getElementById('app')) {
             let detectBrowser = new DetectBrowser().detectBrowser || false;
             if (detectBrowser.isDesktopChrome &&
-                !detectBrowser.isIOSChrome) {
+                !detectBrowser.isIOSChrome &&
+                !detectBrowser.isIE &&
+                !detectBrowser.isMobile) {
                 ReactDOM.render(
                     <Microphone name={this.name} />,
                     document.getElementById('app')
@@ -52,7 +54,7 @@ class Index {
             } else {
                 document.getElementById('app').innerHTML =
                     '<h1 class="display-1 text-danger">' +
-                    'Sorry!!!Your device is not compatible with this app.' +
+                    'Sorry!!! Your device is not compatible yet to use.' +
                     '</h1>';
             }
         }
