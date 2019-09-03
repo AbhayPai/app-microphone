@@ -14,13 +14,18 @@ import ReactDOM from 'react-dom';
  */
 import Microphone from 'ComponentsPath/Microphone';
 
+/*
+ *  All Usable Modules in this File
+ */
+import DetectBrowser from 'ModulesPath/DetectBrowser';
+
 class Index {
     /*
      *  @constructor
      *  all definition of variable should be done inside this
      */
     constructor () {
-        this.name = 'User';
+        this.name = 'Transcriber';
     }
 
     /*
@@ -37,10 +42,16 @@ class Index {
      */
     render () {
         if (document.getElementById('app')) {
-            ReactDOM.render(
-                <Microphone name={this.name} />,
-                document.getElementById('app')
-            );
+            let detectBrowser = new DetectBrowser().detectBrowser || false;
+            if (detectBrowser.isDesktopChrome) {
+                ReactDOM.render(
+                    <Microphone name={this.name} />,
+                    document.getElementById('app')
+                );
+            } else {
+                document.getElementById('app').innerHTML =
+                    '<h1 class="display-1 text-danger">Your device is not compatible with this app.</h1>';
+            }
         }
     }
 }

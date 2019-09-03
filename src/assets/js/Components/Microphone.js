@@ -14,6 +14,7 @@ class Microphone extends React.Component {
         this.speechRecongnition = null;
         this.stopRecord = this.stopRecord.bind(this);
         this.startRecord = this.startRecord.bind(this);
+        this.downloadRecord = this.downloadRecord.bind(this);
 
         this.state = {
             text: 'Speak something after clicking on Start Recording, I Will update here'
@@ -76,10 +77,16 @@ class Microphone extends React.Component {
                             Stop Recording
                         </a>
                     </div>
+                    <div className='col-3 col-sm-1 col-lg-2'>
+                        <a className='btn btn-primary text-white' onClick={this.downloadRecord}>
+                            Download
+                        </a>
+                        <a id='download' className='d-none' />
+                    </div>
                 </div>
                 <div className='row'>
                     <div className='col-12'>
-                        <p>{this.state.text}</p>
+                        <p id='recordedText'>{this.state.text}</p>
                     </div>
                 </div>
             </Fragment>
@@ -88,15 +95,17 @@ class Microphone extends React.Component {
 
     startRecord() {
         if (this.speechRecongnition) {
-            var noteContent = '';
+            let current = '';
+            let transcript = '';
+            let noteContent = '';
+            let mobileRepeatBug = '';
+
             this.speechRecongnition.start();
 
             this.speechRecongnition.onresult = (event) => {
-                // eslint-disable-next-line
-                console.log('onresult', event);
-                var current = event.resultIndex;
-                var transcript = event.results[current][0].transcript;
-                var mobileRepeatBug = (current == 1 &&
+                current = event.resultIndex;
+                transcript = event.results[current][0].transcript;
+                mobileRepeatBug = (current == 1 &&
                     transcript == event.results[0][0].transcript);
 
                 if(!mobileRepeatBug) {
@@ -113,6 +122,19 @@ class Microphone extends React.Component {
     stopRecord() {
         if (this.speechRecongnition) {
             this.speechRecongnition.stop();
+        }
+    }
+
+    downloadRecord() {
+        if (document.getElementById('recordedText') &&
+            document.getElementById('download') &&
+            document.getElementById('download').innerText === '') {
+            let download = document.getElementById('download');
+            let recordToSave = document.getElementById('recordedText').innerText;
+            download.setAttribute('download', 'download.txt');
+            download.setAttribute('href', 'data:application/txt,' +
+                encodeURI(recordToSave));
+            download.click();
         }
     }
 }
