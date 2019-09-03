@@ -17,7 +17,7 @@ class Microphone extends React.Component {
         this.downloadRecord = this.downloadRecord.bind(this);
 
         this.state = {
-            text: 'Speak something after clicking on Start Recording, I Will update here'
+            text: 'Speak something after clicking on Start Recording, I will record your speech here'
         };
 
         try {
@@ -79,7 +79,7 @@ class Microphone extends React.Component {
                     </div>
                     <div className='col-3 col-sm-1 col-lg-2'>
                         <a className='btn btn-primary text-white' onClick={this.downloadRecord}>
-                            Download
+                            Download Recorded Speech
                         </a>
                         <a id='download' className='d-none' />
                     </div>
