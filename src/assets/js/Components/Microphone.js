@@ -79,6 +79,8 @@ class Microphone extends React.Component {
                             Stop Recording
                         </a>
                     </div>
+                </div>
+                <div className='row mt-3'>
                     <div className='col-3 col-sm-1 col-lg-2'>
                         <a className='btn btn-primary text-white' onClick={this.downloadRecordText}>
                             Download Recorded Speech as Text File
@@ -90,7 +92,7 @@ class Microphone extends React.Component {
                         </a>
                     </div>
                 </div>
-                <div className='row'>
+                <div className='row mt-3'>
                     <div className='col-12'>
                         <p id='recordedText'>{this.state.text}</p>
                     </div>
