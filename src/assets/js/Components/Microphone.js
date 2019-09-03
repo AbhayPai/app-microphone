@@ -14,7 +14,8 @@ class Microphone extends React.Component {
         this.speechRecongnition = null;
         this.stopRecord = this.stopRecord.bind(this);
         this.startRecord = this.startRecord.bind(this);
-        this.downloadRecord = this.downloadRecord.bind(this);
+        this.downloadRecordDoc = this.downloadRecordDoc.bind(this);
+        this.downloadRecordText = this.downloadRecordText.bind(this);
 
         this.state = {
             text: 'Speak something after clicking on Start Recording, I will record your speech here'
@@ -67,6 +68,7 @@ class Microphone extends React.Component {
                     </div>
                 </div>
                 <div className='row'>
+                    <a id='download' className='d-none' />
                     <div className='col-3 col-sm-1 col-lg-2'>
                         <a className='btn btn-primary text-white' onClick={this.startRecord}>
                             Start Recording
@@ -78,10 +80,14 @@ class Microphone extends React.Component {
                         </a>
                     </div>
                     <div className='col-3 col-sm-1 col-lg-2'>
-                        <a className='btn btn-primary text-white' onClick={this.downloadRecord}>
-                            Download Recorded Speech
+                        <a className='btn btn-primary text-white' onClick={this.downloadRecordText}>
+                            Download Recorded Speech as Text File
                         </a>
-                        <a id='download' className='d-none' />
+                    </div>
+                    <div className='col-3 col-sm-1 col-lg-2'>
+                        <a className='btn btn-primary text-white' onClick={this.downloadRecordDoc}>
+                            Download Recorded Speech as Microsoft Doc File
+                        </a>
                     </div>
                 </div>
                 <div className='row'>
@@ -125,14 +131,36 @@ class Microphone extends React.Component {
         }
     }
 
-    downloadRecord() {
+    downloadRecordText() {
         if (document.getElementById('recordedText') &&
             document.getElementById('download') &&
             document.getElementById('download').innerText === '') {
             let download = document.getElementById('download');
             let recordToSave = document.getElementById('recordedText').innerText;
-            download.setAttribute('download', 'download.txt');
+
+            download.setAttribute('download',
+                new Date().getDate() + '-' +
+                new Date().getMonth() + '-' +
+                new Date().getYear() + '-' +
+                new Date().getTime() + '-download.txt');
             download.setAttribute('href', 'data:application/txt,' +
+                encodeURI(recordToSave));
+            download.click();
+        }
+    }
+
+    downloadRecordDoc() {
+        if (document.getElementById('recordedText') &&
+            document.getElementById('download') &&
+            document.getElementById('download').innerText === '') {
+            let download = document.getElementById('download');
+            let recordToSave = document.getElementById('recordedText').innerText;
+            download.setAttribute('download',
+                new Date().getDate() + '-' +
+                new Date().getMonth() + '-' +
+                new Date().getYear() + '-' +
+                new Date().getTime() + '-download.doc');
+            download.setAttribute('href', 'data:text/doc;charset=utf-8,' +
                 encodeURI(recordToSave));
             download.click();
         }
