@@ -25,12 +25,6 @@ class Microphone extends React.Component {
             speechRecongnition = window.SpeechRecognition ||
                 window.webkitSpeechRecognition;
             this.speechRecongnition = new speechRecongnition();
-            this.speechRecongnition.onresult =
-                this.speechRecongnition.onresult.bind(this);
-            this.speechRecongnition.onspeechstart =
-                this.speechRecongnition.onspeechstart.bind(this);
-            this.speechRecongnition.onspeechend =
-                this.speechRecongnition.onspeechend.bind(this);
         } catch(e) {
             // Do Nothing.
         }
@@ -109,6 +103,31 @@ class Microphone extends React.Component {
             let mobileRepeatBug = '';
 
             this.speechRecongnition.start();
+
+            this.speechRecongnition.audiostart = (event) => {
+                // eslint-disable-next-line
+                console.log('audiostart', event);
+            };
+            this.speechRecongnition.audioend = (event) => {
+                // eslint-disable-next-line
+                console.log('audioend', event);
+            };
+            this.speechRecongnition.soundstart = (event) => {
+                // eslint-disable-next-line
+                console.log('soundstart', event);
+            };
+            this.speechRecongnition.soundend = (event) => {
+                // eslint-disable-next-line
+                console.log('soundend', event);
+            };
+            this.speechRecongnition.speechstart = (event) => {
+                // eslint-disable-next-line
+                console.log('soundstart', event);
+            };
+            this.speechRecongnition.speechend = (event) => {
+                // eslint-disable-next-line
+                console.log('soundstart', event);
+            };
 
             this.speechRecongnition.onresult = (event) => {
                 current = event.resultIndex;
