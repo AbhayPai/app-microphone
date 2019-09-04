@@ -18,9 +18,9 @@ class Microphone extends React.Component {
         this.downloadRecordText = this.downloadRecordText.bind(this);
 
         this.state = {
-            sound: 'Sound Status',
-            audio: 'Audio Status',
-            speech: 'Speech Status',
+            audio: 'Microphone is Off',
+            sound: 'Sound recording is not started',
+            speech: 'Speech recording is not started',
             text: `Speak something after clicking on Start Recording,
                 I will record your speech here`,
         };
@@ -123,55 +123,37 @@ class Microphone extends React.Component {
 
             this.speechRecongnition.start();
 
-            this.speechRecongnition.onaudiostart = (event) => {
-                // eslint-disable-next-line
-                console.log('audiostart', event);
-
+            this.speechRecongnition.onaudiostart = () => {
                 this.setState({
                     audio: 'Microphone is On'
                 });
             };
 
-            this.speechRecongnition.onaudioend = (event) => {
-                // eslint-disable-next-line
-                console.log('audioend', event);
-
+            this.speechRecongnition.onaudioend = () => {
                 this.setState({
                     audio: 'Microphone is Off'
                 });
             };
 
-            this.speechRecongnition.onsoundstart = (event) => {
-                // eslint-disable-next-line
-                console.log('soundstart', event);
-
+            this.speechRecongnition.onsoundstart = () => {
                 this.setState({
                     sound: 'Sound Started'
                 });
             };
 
-            this.speechRecongnition.onsoundend = (event) => {
-                // eslint-disable-next-line
-                console.log('soundend', event);
-
+            this.speechRecongnition.onsoundend = () => {
                 this.setState({
                     sound: 'Sound Ended'
                 });
             };
 
-            this.speechRecongnition.onspeechstart = (event) => {
-                // eslint-disable-next-line
-                console.log('onspeechstart', event);
-
+            this.speechRecongnition.onspeechstart = () => {
                 this.setState({
                     speech: 'Record is ongoing'
                 });
             };
 
-            this.speechRecongnition.onspeechend = (event) => {
-                // eslint-disable-next-line
-                console.log('onspeechend', event);
-
+            this.speechRecongnition.onspeechend = () => {
                 this.setState({
                     speech: 'Recording is completed'
                 });
