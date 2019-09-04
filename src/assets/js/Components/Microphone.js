@@ -104,6 +104,9 @@ class Microphone extends React.Component {
 
             this.speechRecongnition.start();
 
+            // eslint-disable-next-line
+            console.log('this.speechRecongnition', this.speechRecongnition);
+
             this.speechRecongnition.audiostart = (event) => {
                 // eslint-disable-next-line
                 console.log('audiostart', event);
