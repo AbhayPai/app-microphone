@@ -55,7 +55,7 @@ class Index {
             } else {
                 document.getElementById('app').innerHTML =
                     '<h1 class="display-1 text-danger">' +
-                    'Sorry!!! Your device is not compatible yet to use.' +
+                    'Sorry!!! This app is compatible only with dekstop chrome browser.' +
                     '</h1>';
             }
         }
