@@ -19,7 +19,7 @@ module.exports = {
 
     output: {
         filename: 'js/[name].' + CustomTimeHash + '.js',
-        path: Path.join(Webpack_DIR, 'web/')
+        path: Path.join(Webpack_DIR, './')
     },
 
     resolve: {
@@ -77,7 +77,16 @@ module.exports = {
 
         new CleanWebpackPlugin({
             verbose:  true,
-            cleanStaleWebpackAssets: false
+            cleanStaleWebpackAssets: false,
+            cleanOnceBeforeBuildPatterns: [
+                'css/**/*',
+                'js/**/*',
+                'images/**/*',
+                'index.html',
+                'manifest.json',
+                '!src/**/*',
+                '!node_modules/**/*',
+            ]
         }),
 
         new UglifyJsPlugin({

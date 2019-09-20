@@ -12,7 +12,7 @@ module.exports = function(config) {
 
     this.copyFiles = [
         {
-            to: config.Path.join(config.Webpack_DIR, 'web/', 'images/'),
+            to: config.Path.join(config.Webpack_DIR, './', 'images/'),
             from: config.Path.join(config.Webpack_DIR, 'src/assets/images/')
         }
     ];
@@ -37,7 +37,7 @@ module.exports = function(config) {
                 ),
                 filename: config.Path.join(
                     config.Webpack_DIR,
-                    'web/',
+                    './',
                     'index.html'
                 ),
                 assets: {

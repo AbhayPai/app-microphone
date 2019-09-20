@@ -12,6 +12,7 @@ import ReactDOM from 'react-dom';
 /*
  *  All Usable React Reusable Components in this File
  */
+import Navbar from 'ComponentsPath/Navbar';
 import Microphone from 'ComponentsPath/Microphone';
 
 /*
@@ -49,7 +50,12 @@ class Index {
                 !detectBrowser.isMobile &&
                 !detectBrowser.isOpera) {
                 ReactDOM.render(
-                    <Microphone name={this.name} />,
+                    <React.Fragment>
+                        <Navbar />
+                        <div className='container-fluid'>
+                            <Microphone name={this.name} />
+                        </div>
+                    </React.Fragment>,
                     document.getElementById('app')
                 );
             } else {
